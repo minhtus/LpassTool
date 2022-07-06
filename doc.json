@@ -1,0 +1,615 @@
+[
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+
+    ],
+    "stripped_doc" : [
+
+    ],
+    "desc" : "Region for function and method interacting with Apple keychain",
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "Constructor" : [
+
+    ],
+    "doc" : "Region for function and method interacting with Apple keychain",
+    "Method" : [
+
+    ],
+    "Command" : [
+
+    ],
+    "Field" : [
+
+    ],
+    "items" : [
+
+    ],
+    "name" : "Keychain"
+  },
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+
+    ],
+    "stripped_doc" : [
+
+    ],
+    "desc" : "Region for functions and methods interacting with Lastpass CLI",
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "Constructor" : [
+
+    ],
+    "doc" : "Region for functions and methods interacting with Lastpass CLI",
+    "Method" : [
+
+    ],
+    "Command" : [
+
+    ],
+    "Field" : [
+
+    ],
+    "items" : [
+
+    ],
+    "name" : "Lastpass region"
+  },
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+      {
+        "name" : "frequency",
+        "stripped_doc" : [
+          "Speed in seconds to sync changes"
+        ],
+        "def" : "LpassTool.frequency",
+        "doc" : "Speed in seconds to sync changes",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool.frequency",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "desc" : "Speed in seconds to sync changes",
+        "parameters" : [
+
+        ]
+      },
+      {
+        "name" : "logger",
+        "stripped_doc" : [
+          "Logger instance"
+        ],
+        "def" : "LpassTool.logger",
+        "doc" : "Logger instance",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool.logger",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "desc" : "Logger instance",
+        "parameters" : [
+
+        ]
+      }
+    ],
+    "stripped_doc" : [
+
+    ],
+    "desc" : "Utility for getting password from lastpass using provided cli, and display a chooser for autofill password.",
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "Constructor" : [
+
+    ],
+    "doc" : "Utility for getting password from lastpass using provided cli, and display a chooser for autofill password.",
+    "Method" : [
+      {
+        "name" : "_tryAutoLogin",
+        "stripped_doc" : [
+          "Try to login with keychain credentials",
+          ""
+        ],
+        "def" : "LpassTool:_tryAutoLogin()",
+        "doc" : "Try to login with keychain credentials\n\nParameters:\n * promptIfFailed - whether to prompt user for input if not found credentials from keychain",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_tryAutoLogin()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Try to login with keychain credentials",
+        "parameters" : [
+          " * promptIfFailed - whether to prompt user for input if not found credentials from keychain"
+        ]
+      },
+      {
+        "name" : "_trySyncLastPass",
+        "stripped_doc" : [
+          "Sync last pass changes with credentials from keychain if session expired",
+          ""
+        ],
+        "def" : "LpassTool:_trySyncLastPass()",
+        "doc" : "Sync last pass changes with credentials from keychain if session expired\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_trySyncLastPass()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Sync last pass changes with credentials from keychain if session expired",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "_populateChooser",
+        "stripped_doc" : [
+          "Fill in the password chooser",
+          ""
+        ],
+        "def" : "LpassTool:_populateChooser()",
+        "doc" : "Fill in the password chooser\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_populateChooser()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Fill in the password chooser",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "_trySyncLastPass",
+        "stripped_doc" : [
+          "Process the selected item from the chooser",
+          ""
+        ],
+        "def" : "LpassTool:_trySyncLastPass()",
+        "doc" : "Process the selected item from the chooser\n\nParameters:\n * value - lastpass item id",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_trySyncLastPass()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Process the selected item from the chooser",
+        "parameters" : [
+          " * value - lastpass item id"
+        ]
+      },
+      {
+        "name" : "promptLogin",
+        "stripped_doc" : [
+          "Prompt user for Lastpass credentials",
+          ""
+        ],
+        "def" : "LpassTool:promptLogin()",
+        "doc" : "Prompt user for Lastpass credentials\n\nParameters:\n  * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:promptLogin()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Prompt user for Lastpass credentials",
+        "parameters" : [
+          "  * None"
+        ]
+      },
+      {
+        "name" : "start",
+        "stripped_doc" : [
+          "Start the pass chooser and the sync timer",
+          ""
+        ],
+        "def" : "LpassTool:start()",
+        "doc" : "Start the pass chooser and the sync timer\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:start()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Start the pass chooser and the sync timer",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "showChooser",
+        "stripped_doc" : [
+          "Display the password chooser",
+          ""
+        ],
+        "def" : "LpassTool:showChooser()",
+        "doc" : "Display the password chooser\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:showChooser()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Display the password chooser",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "toggleChooser",
+        "stripped_doc" : [
+          "Show\/hide the passwd chooser",
+          ""
+        ],
+        "def" : "LpassTool:toggleChooser()",
+        "doc" : "Show\/hide the passwd chooser\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:toggleChooser()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Show\/hide the passwd chooser",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "bindHotkeys",
+        "stripped_doc" : [
+          "Binds hotkeys for LpassTool",
+          ""
+        ],
+        "def" : "LpassTool:bindHotkeys(mapping)",
+        "doc" : "Binds hotkeys for LpassTool\n\nParameters:\n * mapping - A table containing hotkeys for the following items:\n  * toggle_chooser - Show\/hide the password chooser",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:bindHotkeys(mapping)",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Binds hotkeys for LpassTool",
+        "parameters" : [
+          " * mapping - A table containing hotkeys for the following items:",
+          "  * toggle_chooser - Show\/hide the password chooser"
+        ]
+      }
+    ],
+    "Command" : [
+
+    ],
+    "Field" : [
+
+    ],
+    "items" : [
+      {
+        "name" : "frequency",
+        "stripped_doc" : [
+          "Speed in seconds to sync changes"
+        ],
+        "def" : "LpassTool.frequency",
+        "doc" : "Speed in seconds to sync changes",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool.frequency",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "desc" : "Speed in seconds to sync changes",
+        "parameters" : [
+
+        ]
+      },
+      {
+        "name" : "logger",
+        "stripped_doc" : [
+          "Logger instance"
+        ],
+        "def" : "LpassTool.logger",
+        "doc" : "Logger instance",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool.logger",
+        "type" : "Variable",
+        "returns" : [
+
+        ],
+        "desc" : "Logger instance",
+        "parameters" : [
+
+        ]
+      },
+      {
+        "name" : "_populateChooser",
+        "stripped_doc" : [
+          "Fill in the password chooser",
+          ""
+        ],
+        "def" : "LpassTool:_populateChooser()",
+        "doc" : "Fill in the password chooser\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_populateChooser()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Fill in the password chooser",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "_tryAutoLogin",
+        "stripped_doc" : [
+          "Try to login with keychain credentials",
+          ""
+        ],
+        "def" : "LpassTool:_tryAutoLogin()",
+        "doc" : "Try to login with keychain credentials\n\nParameters:\n * promptIfFailed - whether to prompt user for input if not found credentials from keychain",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_tryAutoLogin()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Try to login with keychain credentials",
+        "parameters" : [
+          " * promptIfFailed - whether to prompt user for input if not found credentials from keychain"
+        ]
+      },
+      {
+        "name" : "_trySyncLastPass",
+        "stripped_doc" : [
+          "Process the selected item from the chooser",
+          ""
+        ],
+        "def" : "LpassTool:_trySyncLastPass()",
+        "doc" : "Process the selected item from the chooser\n\nParameters:\n * value - lastpass item id",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_trySyncLastPass()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Process the selected item from the chooser",
+        "parameters" : [
+          " * value - lastpass item id"
+        ]
+      },
+      {
+        "name" : "_trySyncLastPass",
+        "stripped_doc" : [
+          "Sync last pass changes with credentials from keychain if session expired",
+          ""
+        ],
+        "def" : "LpassTool:_trySyncLastPass()",
+        "doc" : "Sync last pass changes with credentials from keychain if session expired\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:_trySyncLastPass()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Sync last pass changes with credentials from keychain if session expired",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "bindHotkeys",
+        "stripped_doc" : [
+          "Binds hotkeys for LpassTool",
+          ""
+        ],
+        "def" : "LpassTool:bindHotkeys(mapping)",
+        "doc" : "Binds hotkeys for LpassTool\n\nParameters:\n * mapping - A table containing hotkeys for the following items:\n  * toggle_chooser - Show\/hide the password chooser",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:bindHotkeys(mapping)",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Binds hotkeys for LpassTool",
+        "parameters" : [
+          " * mapping - A table containing hotkeys for the following items:",
+          "  * toggle_chooser - Show\/hide the password chooser"
+        ]
+      },
+      {
+        "name" : "promptLogin",
+        "stripped_doc" : [
+          "Prompt user for Lastpass credentials",
+          ""
+        ],
+        "def" : "LpassTool:promptLogin()",
+        "doc" : "Prompt user for Lastpass credentials\n\nParameters:\n  * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:promptLogin()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Prompt user for Lastpass credentials",
+        "parameters" : [
+          "  * None"
+        ]
+      },
+      {
+        "name" : "showChooser",
+        "stripped_doc" : [
+          "Display the password chooser",
+          ""
+        ],
+        "def" : "LpassTool:showChooser()",
+        "doc" : "Display the password chooser\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:showChooser()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Display the password chooser",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "start",
+        "stripped_doc" : [
+          "Start the pass chooser and the sync timer",
+          ""
+        ],
+        "def" : "LpassTool:start()",
+        "doc" : "Start the pass chooser and the sync timer\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:start()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Start the pass chooser and the sync timer",
+        "parameters" : [
+          " * None"
+        ]
+      },
+      {
+        "name" : "toggleChooser",
+        "stripped_doc" : [
+          "Show\/hide the passwd chooser",
+          ""
+        ],
+        "def" : "LpassTool:toggleChooser()",
+        "doc" : "Show\/hide the passwd chooser\n\nParameters:\n * None",
+        "notes" : [
+
+        ],
+        "signature" : "LpassTool:toggleChooser()",
+        "type" : "Method",
+        "returns" : [
+
+        ],
+        "desc" : "Show\/hide the passwd chooser",
+        "parameters" : [
+          " * None"
+        ]
+      }
+    ],
+    "name" : "LpassTool"
+  },
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+
+    ],
+    "stripped_doc" : [
+
+    ],
+    "desc" : "Region for main LpassTool application",
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "Constructor" : [
+
+    ],
+    "doc" : "Region for main LpassTool application",
+    "Method" : [
+
+    ],
+    "Command" : [
+
+    ],
+    "Field" : [
+
+    ],
+    "items" : [
+
+    ],
+    "name" : "Main region"
+  }
+]

@@ -21,9 +21,12 @@ obj.prevFocusedWindow = nil
 -- Internal variable - Timer object to sync last pass changes
 obj.timer = nil
 --- LpassTool.frequency
+--- Variable
 --- Speed in seconds to sync changes
 obj.frequency = 300
 --- LpassTool.logger
+--- Variable
+--- Logger instance
 obj.logger = hs.logger.new('LpassTool')
 
 -- API to interact with os clipboard
@@ -39,7 +42,9 @@ local keychainMapping = {
 }
 
 
---- ==== Keychain region ===============================================================================================
+--- ==== Keychain ===============================================================================================
+---
+--- Region for function and method interacting with Apple keychain
 
 -- Parse output from keychain to a friendly format
 local function parseKeyVal(k, v)
@@ -56,8 +61,8 @@ end
 function obj:_saveMasterPassword(accountName, password)
     local _, status, _, rc = hs.execute('security add-generic-password -a '..accountName..' -s hammerspoon.'..self.name..' -U -w "'..password..'"')
     if not status or rc ~= 0 then
+        hs.dialog.alert('Failed to persist master password into keychain')
         self.logger.e('Error when saving master password to Apple keychain')
-        hs.dialog.alert('Failed to persist master password')
     end
 end
 
@@ -67,7 +72,7 @@ function obj:_getMasterPassword()
     local credentials = {}
     local result, status, _, rc = hs.execute('security 2>&1 find-generic-password -g -l hammerspoon.'..self.name)
     if status and rc == 0 then
-        for line in result:gmatch('([^\n]+)\n') do
+        for line in string.gmatch(result, '([^\n]+)\n') do
             k,v = string.match(line, "^%s+(.*) ?<.*>=(.*)$")
             if k ~= nil then
                 k,_ = string.gsub(k, '"(.*)"', "%1") -- remove quotes
@@ -93,6 +98,8 @@ function obj:_getMasterPassword()
 end
 
 --- === Lastpass region ================================================================================================
+---
+--- Region for functions and methods interacting with Lastpass CLI
 
 -- Get Lastpass login status
 function obj:_lpassStatus()
@@ -103,6 +110,7 @@ function obj:_lpassStatus()
         self.logger.d('Not logged in.')
         return false
     else
+        hs.dialog.alert('Error! Did you install Lastpass CLI?')
         self.logger.e('Error! Please check for lpass cli whether it exist in PATH yet?')
     end
 end
@@ -128,7 +136,7 @@ function obj:_lpassLogin(email, password)
     if status and rc == 0 then
         return true
     else
-        self.logger.e('Failed to login with lpass')
+        self.logger.e('Failed to login to lpass')
         return false
     end
 end
@@ -141,7 +149,7 @@ function obj:_lpassLs(sync)
     if status and rc == 0 then
         return self:_parseLpassLs(result)
     else
-        self.logger.e('Failed to list last pass')
+        self.logger.e('Failed to list lpass')
     end
 end
 
@@ -166,13 +174,15 @@ function obj:_parseLpassShow(value)
 end
 
 --- === Main region ====================================================================================================
+---
+--- Region for main LpassTool application
 
 --- LpassTool:_tryAutoLogin()
---- Internal Method
+--- Method
 --- Try to login with keychain credentials
 ---
 --- Parameters:
----  * promptIfFailed whether to prompt user for input if not found credentials from keychain
+---  * promptIfFailed - whether to prompt user for input if not found credentials from keychain
 function obj:_tryAutoLogin(promptIfFailed)
     promptIfFailed = promptIfFailed or false
     local credentials = self:_getMasterPassword()
@@ -181,14 +191,14 @@ function obj:_tryAutoLogin(promptIfFailed)
     else
         local success = self:_asyncLpassLogin(credentials.account, credentials.password)
         if not success then
-            self.logger.error('Error logging in with provided credentials')
+            self.logger.error('Error logging in with credentials from keychain')
         end
     end
 end
 
 
 --- LpassTool:_trySyncLastPass()
---- Internal Method
+--- Method
 --- Sync last pass changes with credentials from keychain if session expired
 ---
 --- Parameters:
@@ -205,7 +215,7 @@ function obj:_trySyncLastPass()
 end
 
 --- LpassTool:_populateChooser()
---- Internal Method
+--- Method
 --- Fill in the password chooser
 ---
 --- Parameters:
@@ -230,11 +240,11 @@ end
 
 
 --- LpassTool:_trySyncLastPass()
---- Internal Method
+--- Method
 --- Process the selected item from the chooser
 ---
 --- Parameters:
----  * value lastpass item id
+---  * value - lastpass item id
 function obj:_processSelectedItem(value)
     if self.prevFocusedWindow ~= nil then
         self.prevFocusedWindow:focus()
@@ -264,6 +274,9 @@ function obj:promptLogin()
     local success = self:_asyncLpassLogin(email, loginPasswd)
     if success then
         self:_saveMasterPassword(email, loginPasswd)
+    else
+        hs.dialog.alert('Unable to login to Lastpass account '..email)
+        self.logger.error('Error logging in with provided credentials')
     end
 end
 
