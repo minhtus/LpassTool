@@ -348,3 +348,6 @@ function obj:bindHotkeys(mapping)
     hs.spoons.bindHotkeysToSpec(def, mapping)
     obj.mapping = mapping
 end
+
+
+return obj
