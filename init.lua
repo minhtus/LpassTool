@@ -189,9 +189,10 @@ function obj:_tryAutoLogin(promptIfFailed)
     if not credentials and promptIfFailed then
         self:promptLogin()
     else
-        local success = self:_asyncLpassLogin(credentials.account, credentials.password)
+        -- TODO make it async here
+        local success = self:_lpassLogin(credentials.account, credentials.password)
         if not success then
-            self.logger.error('Error logging in with credentials from keychain')
+            self.logger.e('Error logging in with credentials from keychain')
         end
     end
 end
@@ -271,12 +272,16 @@ end
 function obj:promptLogin()
     local _, email = hs.dialog.textPrompt('Email', 'Please login to Lastpass!', '', 'Proceed', '')
     local _, loginPasswd = hs.dialog.textPrompt('Password', 'Login as: '..email, '', 'Login', '', true)
-    local success = self:_asyncLpassLogin(email, loginPasswd)
+    local success = self:_lpassLogin(email, loginPasswd)
     if success then
         self:_saveMasterPassword(email, loginPasswd)
+        hs.alert.show('Logged in as '..email)
     else
-        hs.dialog.alert('Unable to login to Lastpass account '..email)
-        self.logger.error('Error logging in with provided credentials')
+        local selected = hs.dialog.blockAlert('ERROR', 'Unable to login to Lastpass account '..email..'!', 'Try again', 'Cancel', 'warning')
+        if selected == 'Try again' then
+            self:promptLogin()
+        end
+        self.logger.e('Error logging in with provided credentials')
     end
 end
 
