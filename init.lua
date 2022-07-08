@@ -29,9 +29,6 @@ obj.frequency = 300
 --- Logger instance
 obj.logger = hs.logger.new('LpassTool')
 
--- API to interact with os clipboard
-local pasteboard = require("hs.pasteboard")
-
 -- key mapping for parsing keychain output
 local keychainMapping = {
     acct = "account",
@@ -254,8 +251,7 @@ function obj:_processSelectedItem(value)
         local result, status, _, rc = hs.execute('lpass show '..value.uuid..' --sync=no', true)
         if status and rc == 0 then
             local passwd = self:_parseLpassShow(result)
-            pasteboard.setContents(passwd)
-            hs.eventtap.keyStroke({"cmd"}, "v")
+            hs.eventtap.keyStrokes(passwd)
         else
             self.logger.e('Error getting password: '..result)
         end
