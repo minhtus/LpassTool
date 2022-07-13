@@ -113,11 +113,6 @@ function obj:_lpassStatus()
 end
 
 
--- Sync Lastpass changes
-function obj:_syncLastPass()
-    return hs.execute('lpass sync', true)
-end
-
 -- Async wrapper of Lastpass login TODO find a true non-blocking way
 function obj:_asyncLpassLogin(email, password)
     local co = coroutine.create(self._lpassLogin)
@@ -142,10 +137,18 @@ end
 -- List Lastpass items
 function obj:_lpassLs(sync)
     sync = sync or false
-    local result, status, _, rc = hs.execute('lpass ls --sync='..(sync and 'now' or 'no'), true)
+    local result, status, type, rc
+    if sync then
+        result, status, type, rc = hs.execute('lpass ls --sync=now', true)
+    else
+        result, status, type, rc = hs.execute('lpass ls --sync=no', true)
+    end
     if status and rc == 0 then
         return self:_parseLpassLs(result)
     else
+        if not sync then
+            return self:_lpassLs(true)
+        end
         self.logger.e('Failed to list lpass')
     end
 end
@@ -203,12 +206,12 @@ end
 ---  * None
 function obj:_trySyncLastPass()
     self.logger.d('Syncing lastpass')
-    local _, status, _, rc = self:_syncLastPass()
+    local _, status, _, rc = self:_lpassLs(true)
     if status and rc == 0 then
         return true
     else
         self:_tryAutoLogin()
-        self:_syncLastPass()
+        self:_lpassLs(true)
     end
 end
 
